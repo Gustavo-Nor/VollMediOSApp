@@ -16,6 +16,13 @@
 		48539DEF2AB0F47C005BD7C9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48539DEE2AB0F47C005BD7C9 /* ContentView.swift */; };
 		48539DF12AB0F47D005BD7C9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 48539DF02AB0F47D005BD7C9 /* Assets.xcassets */; };
 		48539DF42AB0F47D005BD7C9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 48539DF32AB0F47D005BD7C9 /* Preview Assets.xcassets */; };
+		C1B142FF2BBB32680078FA2A /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = C1B142FE2BBB32680078FA2A /* Alamofire */; };
+		C1B143012BBB32680078FA2A /* AlamofireDynamic in Frameworks */ = {isa = PBXBuildFile; productRef = C1B143002BBB32680078FA2A /* AlamofireDynamic */; };
+		C1B143032BBB58560078FA2A /* ScheduleAppointmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B143022BBB58560078FA2A /* ScheduleAppointmentView.swift */; };
+		C1B143062BBB62CC0078FA2A /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B143052BBB62CC0078FA2A /* Date+.swift */; };
+		C1B143082BBB63CB0078FA2A /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B143072BBB63CB0078FA2A /* String+.swift */; };
+		C1B1430A2BBB65AE0078FA2A /* ScheduleAppointment.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B143092BBB65AE0078FA2A /* ScheduleAppointment.swift */; };
+		C1B1430C2BBB705F0078FA2A /* MyAppointmentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B1430B2BBB705E0078FA2A /* MyAppointmentsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +36,11 @@
 		48539DEE2AB0F47C005BD7C9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		48539DF02AB0F47D005BD7C9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		48539DF32AB0F47D005BD7C9 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		C1B143022BBB58560078FA2A /* ScheduleAppointmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleAppointmentView.swift; sourceTree = "<group>"; };
+		C1B143052BBB62CC0078FA2A /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
+		C1B143072BBB63CB0078FA2A /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
+		C1B143092BBB65AE0078FA2A /* ScheduleAppointment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleAppointment.swift; sourceTree = "<group>"; };
+		C1B1430B2BBB705E0078FA2A /* MyAppointmentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAppointmentsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,6 +48,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C1B142FF2BBB32680078FA2A /* Alamofire in Frameworks */,
+				C1B143012BBB32680078FA2A /* AlamofireDynamic in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -47,6 +61,8 @@
 			children = (
 				484BEEF92AB0F5630033C07A /* Components */,
 				484BEF042AB0F7970033C07A /* HomeView.swift */,
+				C1B143022BBB58560078FA2A /* ScheduleAppointmentView.swift */,
+				C1B1430B2BBB705E0078FA2A /* MyAppointmentsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -64,6 +80,7 @@
 			isa = PBXGroup;
 			children = (
 				484BEEFC2AB0F5750033C07A /* Specialist.swift */,
+				C1B143092BBB65AE0078FA2A /* ScheduleAppointment.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -95,6 +112,7 @@
 		48539DEB2AB0F47C005BD7C9 /* Vollmed */ = {
 			isa = PBXGroup;
 			children = (
+				C1B143042BBB62BA0078FA2A /* Extensions */,
 				484BEEFB2AB0F56C0033C07A /* Services */,
 				484BEEFA2AB0F5680033C07A /* Models */,
 				484BEEF82AB0F55F0033C07A /* Views */,
@@ -114,6 +132,15 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		C1B143042BBB62BA0078FA2A /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				C1B143052BBB62CC0078FA2A /* Date+.swift */,
+				C1B143072BBB63CB0078FA2A /* String+.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -130,6 +157,10 @@
 			dependencies = (
 			);
 			name = Vollmed;
+			packageProductDependencies = (
+				C1B142FE2BBB32680078FA2A /* Alamofire */,
+				C1B143002BBB32680078FA2A /* AlamofireDynamic */,
+			);
 			productName = Vollmed;
 			productReference = 48539DE92AB0F47C005BD7C9 /* Vollmed.app */;
 			productType = "com.apple.product-type.application";
@@ -158,6 +189,9 @@
 				Base,
 			);
 			mainGroup = 48539DE02AB0F47C005BD7C9;
+			packageReferences = (
+				C1B142FD2BBB32680078FA2A /* XCRemoteSwiftPackageReference "Alamofire" */,
+			);
 			productRefGroup = 48539DEA2AB0F47C005BD7C9 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -184,13 +218,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C1B143062BBB62CC0078FA2A /* Date+.swift in Sources */,
+				C1B1430A2BBB65AE0078FA2A /* ScheduleAppointment.swift in Sources */,
 				48539DEF2AB0F47C005BD7C9 /* ContentView.swift in Sources */,
+				C1B143082BBB63CB0078FA2A /* String+.swift in Sources */,
 				484BEF052AB0F7970033C07A /* HomeView.swift in Sources */,
 				484BEEFD2AB0F5750033C07A /* Specialist.swift in Sources */,
 				484BEF012AB0F6090033C07A /* ButtonView.swift in Sources */,
 				484BEF032AB0F7080033C07A /* SpecialistCardView.swift in Sources */,
 				484BEEFF2AB0F59D0033C07A /* WebService.swift in Sources */,
 				48539DED2AB0F47C005BD7C9 /* VollmedApp.swift in Sources */,
+				C1B1430C2BBB705F0078FA2A /* MyAppointmentsView.swift in Sources */,
+				C1B143032BBB58560078FA2A /* ScheduleAppointmentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -394,6 +433,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C1B142FD2BBB32680078FA2A /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.9.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C1B142FE2BBB32680078FA2A /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C1B142FD2BBB32680078FA2A /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		C1B143002BBB32680078FA2A /* AlamofireDynamic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C1B142FD2BBB32680078FA2A /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = AlamofireDynamic;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 48539DE12AB0F47C005BD7C9 /* Project object */;
 }

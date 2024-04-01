@@ -8,6 +8,24 @@
 import SwiftUI
 
 struct HomeView: View {
+    
+    let service = WebService()
+    
+    @State private var specialists: [Specialist] = []
+    @State private var isLoading = true
+    
+    func getSpecialists() async {
+        do {
+            if let specialist = try await service.getAllSpecialists() {
+                self.specialists = specialist
+                self.isLoading = false
+            }
+        } catch {
+            print("Ocorreu um erro ao obter os especialista: \(error)")
+            self.isLoading = false
+        }
+    }
+    
     var body: some View {
         ScrollView(showsIndicators: false) {
             VStack {
@@ -26,14 +44,24 @@ struct HomeView: View {
                     .foregroundColor(.accentColor)
                     .multilineTextAlignment(.center)
                     .padding(.vertical, 16)
-                ForEach(specialists) { specialist in
-                    SpecialistCardView(specialist: specialist)
-                        .padding(.bottom, 8)
+                
+                if isLoading {
+                    ProgressView()
+                } else {
+                    ForEach(specialists) { specialist in
+                        SpecialistCardView(specialist: specialist)
+                            .padding(.bottom, 8)
+                    }
                 }
             }
             .padding(.horizontal)
         }
         .padding(.top)
+        .onAppear {
+            Task {
+                await getSpecialists()
+            }
+        }
     }
 }
 
