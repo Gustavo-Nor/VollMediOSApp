@@ -10,6 +10,7 @@ import SwiftUI
 struct SpecialistCardView: View {
     
     var specialist: Specialist
+    var appointment: Appointment?
     
     let service = WebService()
     
@@ -48,13 +49,35 @@ struct SpecialistCardView: View {
                         .font(.title3)
                         .bold()
                     Text(specialist.specialty.lowercased().capitalized)
+                    if let appointment {
+                        Text(appointment.date.convertDateStringToReadableDate())
+                            .bold()
+                    }
                 }
             }
             
-            NavigationLink {
-                ScheduleAppointmentView(specialistID: specialist.id)
-            } label: {
-                ButtonView(text: "Agendar consulta")
+            if let appointment {
+                HStack {
+                    NavigationLink {
+                        ScheduleAppointmentView(specialistID: specialist.id, isRescheduleView: true, appointmentID: appointment.id)
+                    } label: {
+                        ButtonView(text: "Remarcar")
+                    }
+                    
+                    NavigationLink {
+                        CancelAppointmentView(appointmentID: appointment.id)
+                    } label: {
+                        ButtonView(text: "Cancelar", buttonType: .cancel)
+                    }
+                    
+    
+                }
+            } else {
+                NavigationLink {
+                    ScheduleAppointmentView(specialistID: specialist.id)
+                } label: {
+                    ButtonView(text: "Agendar consulta")
+                }
             }
         }
         .frame(maxWidth: .infinity, alignment: .leading)

@@ -13,6 +13,71 @@ struct WebService {
     private let baseURL = "http://localhost:8080"
     let imageCache = NSCache<NSString, UIImage>()
     
+    func cancelAppointment(appointmentID: Int, reasonToCancel: String) async throws -> Bool {
+        let endpoint = baseURL + "/consultas/" + "\(appointmentID)"
+        
+        guard let url = URL(string: endpoint) else {
+            print("Erro na URL!")
+            return false
+        }
+        
+        let requestData: [String: String] = ["motivoCancelamento": reasonToCancel]
+        
+        let jsonData = try JSONSerialization.data(withJSONObject: requestData)
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "DELETE"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = jsonData
+        
+        let (_ , response) = try await URLSession.shared.data(for: request)
+        
+        if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 204 {
+            return true
+        }
+        
+        return false
+    }
+    
+    func rescheduleAppointment (appointmentID: Int, date: String) async throws -> ScheduleAppointmentResponse? {
+        let endpoint = baseURL + "/consultas/" + "\(appointmentID)"
+        
+        guard let url = URL(string: endpoint) else {
+            print("Erro na URL!")
+            return nil
+        }
+        
+        let requestData: [String: String] = ["data": date]
+        
+        let jsonData = try JSONSerialization.data(withJSONObject: requestData)
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "PATCH"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = jsonData
+        
+        let (data, _) = try await URLSession.shared.data(for: request)
+        
+        let appointmentResponse = try JSONDecoder().decode(ScheduleAppointmentResponse.self, from: data)
+        
+        return appointmentResponse
+    }
+    
+    func getAllAppointmentsFromPatient(patientID: Int) async throws -> [Appointment]? {
+        let endpoint = baseURL + "/consultas/paciente/" + "\(patientID)"
+        
+        guard let url = URL(string: endpoint) else {
+            print("Erro na URL!")
+            return nil
+        }
+        
+        let (data, _) = try await URLSession.shared.data(from: url)
+        
+        let appointments = try JSONDecoder().decode([Appointment].self, from: data)
+        
+        return appointments
+    }
+    
     func scheduleAppointment(specialistID: Int, 
                              patientID: Int,
                              date: String) async throws -> ScheduleAppointmentResponse? {
