@@ -9,8 +9,27 @@ import SwiftUI
 
 struct SignInView: View {
     
-    @State private var email: String = ""
+    @State private var login: String = ""
     @State private var password: String = ""
+    @State private var showAlert: Bool = false
+    
+    var authManager = AuthenticationManager.shared
+    
+    let service = WebService()
+    
+    func login() async {
+        do {
+            if let response = try await service.loginPatient(login: login, password: password) {
+                authManager.saveToken(token: response.token)
+                authManager.savePatientID(id: response.id)
+            } else {
+                showAlert = true
+            }
+        } catch {
+            showAlert = true
+            print("Ocorreu um erro no login: \(error)")
+        }
+    }
     
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
@@ -34,7 +53,7 @@ struct SignInView: View {
                 .bold()
                 .foregroundStyle(.accent)
             
-            TextField("Insira seu e-mail", text: $email)
+            TextField("Insira seu e-mail", text: $login)
                 .padding(14)
                 .background(Color.gray.opacity(0.25))
                 .cornerRadius(14)
@@ -53,7 +72,9 @@ struct SignInView: View {
                 .cornerRadius(14)
             
             Button {
-                //
+                Task {
+                    await login()
+                }
             } label: {
                 ButtonView(text: "Entrar")
             }
@@ -70,6 +91,17 @@ struct SignInView: View {
         }
         .padding()
         .navigationBarBackButtonHidden()
+        .alert("Opa, algo deu errado!", isPresented: $showAlert) {
+            Button {
+                //
+            } label: {
+                Text("Ok")
+            }
+
+        } message: {
+            Text("Houve um erro ao entrar na sua conta. Por favor tente novamente.")
+        }
+
     }
 }
 

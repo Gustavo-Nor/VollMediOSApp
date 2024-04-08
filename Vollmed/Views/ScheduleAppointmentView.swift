@@ -16,6 +16,8 @@ struct ScheduleAppointmentView: View {
     var isRescheduleView: Bool
     var appointmentID: Int?
     
+    var authManager = AuthenticationManager.shared
+    
     @State private var selectedDate = Date()
     @State private var showAlert = false
     @State private var isAppointmentScheduled = false
@@ -46,8 +48,12 @@ struct ScheduleAppointmentView: View {
     }
     
     func scheduleAppointment() async {
+        guard let patientID = authManager.patientID else {
+            return
+        }
+        
         do {
-            if let _ = try await service.scheduleAppointment(specialistID: specialistID, patientID: 4, date: selectedDate.convertToString()) {
+            if let _ = try await service.scheduleAppointment(specialistID: specialistID, patientID: patientID, date: selectedDate.convertToString()) {
                 isAppointmentScheduled = true
             } else {
                 isAppointmentScheduled = false

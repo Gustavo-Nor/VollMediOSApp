@@ -10,7 +10,7 @@ import Foundation
 struct ScheduleAppointmentResponse: Codable, Identifiable {
     let id: Int
     let specialist: Int
-    let patient: Int
+    let patient: String
     let date: String
     
     enum CodingKeys: String, CodingKey {
@@ -23,7 +23,7 @@ struct ScheduleAppointmentResponse: Codable, Identifiable {
 
 struct ScheduleAppointmentRequest: Codable {
     let specialist: Int
-    let patient: Int
+    let patient: String
     let date: String
     
     enum CodingKeys: String, CodingKey {

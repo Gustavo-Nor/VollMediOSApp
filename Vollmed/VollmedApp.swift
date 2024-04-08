@@ -12,7 +12,7 @@ struct VollmedApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationStack {
-                SignInView()
+                ContentView()
             }
         }
     }
